@@ -2,4 +2,5 @@
 setup.cfg
 setup.py
 cefevent/__init__.py
+cefevent/cefevent.py
 cefevent/syslog.py
