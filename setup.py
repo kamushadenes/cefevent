@@ -2,8 +2,8 @@ import os
 from distutils.core import setup
 
 long_description = 'ArcSight\'s Common Event Format library',
-if os.path.exists('README.txt'):
-    long_description = open('README.txt', 'r').read()
+if os.path.exists('README.rst'):
+    long_description = open('README.rst', 'r').read()
 
 
 setup(
