@@ -12,8 +12,8 @@ destination.
 
 Usage
 -----
-::
-        usage: **init**.py [-h] [--host HOST] [--port PORT] [--auto\_send] [--eps EPS] DEFINITION\_FILE [DEFINITION\_FILE ...]
+.. code:: bash
+        usage: __init__.py [-h] [--host HOST] [--port PORT] [--auto\_send] [--eps EPS] DEFINITION\_FILE [DEFINITION\_FILE ...]
 
         CEF builder and replayer
 
@@ -30,8 +30,9 @@ Usage
 Example
 -------
 
-::
+.. code:: bash
         python **init**.py --host localhost --port 10514 --auto\_send --eps 10000 /tmp/example\_cef\_csv 
+        
         [\*] [2016-07-21T03:27:30] There are 149
         events in the poll. The max EPS is set to 10000 
         [\*] [2016-07-21T03:27:40] Current EPS: 3479.0691266185677
