@@ -2,14 +2,14 @@ import os
 from distutils.core import setup
 
 long_description = 'ArcSight\'s Common Event Format library',
-if os.path.exists('README.rst'):
-    long_description = open('README.rst', 'r').read()
+if os.path.exists('README.md'):
+    long_description = open('README.md', 'r').read()
 
 
 setup(
   name = 'cefevent',
   packages = ['cefevent'], # this must be the same as the name above
-  version = '0.3.2',
+  version = '0.4',
   description = 'ArcSight\'s Common Event Format library',
   long_description = long_description,
   author = 'Kamus Hadenes',
