@@ -49,6 +49,7 @@ from cefevent import CEFEvent
 c = CEFEvent()
 
 c.get_field_metadata('c6a1', 'full_name')
+
 'deviceCustomIPv6Address1'
 
 
@@ -71,7 +72,7 @@ c.get_field_metadata('c6a1')
  'name': 'c6a1'}
 ```
 
-#### Convert ArcSight Naming to CEF naming
+#### Convert ArcSight Naming to CEF Naming
 ```
 from cefevent import CEFEvent
 c = CEFEvent()
@@ -92,7 +93,7 @@ c.set_field('deviceVendor', 'Hyades Inc.')
 c.set_field('deviceProduct', 'cefevent')
 
 # Equal signs will be automatically escaped (and so will pipes (|) and backslashes (\\), as per the white paper specification)
-c.set_field('message', 'This is an test event (Answer=42)')
+c.set_field('message', 'This is a test event (Answer=42)')
 
 # All fields have some sort of validation, check the test() function for examples
 c.set_field('sourceAddress', '192.168.67.1')
