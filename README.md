@@ -102,6 +102,6 @@ c.set_field('sourcePort', 12345)
 # Finally, generate the CEF line
 c.build_cef()
 
-'CEF:0|Hyades Inc.|cefevent|1.0|0|Event Name|5|spt=12345 src=192.168.67.1 msg=This is an test event (Answer\\=42)'
+'CEF:0|Hyades Inc.|cefevent|1.0|0|Event Name|5|spt=12345 src=192.168.67.1 msg=This is a test event (Answer\\=42)'
 
 
