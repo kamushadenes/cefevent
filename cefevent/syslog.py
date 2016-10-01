@@ -35,16 +35,27 @@ class Syslog:
   def __init__(self,
                host="localhost",
                port=514,
-               facility=Facility.DAEMON):
+               facility=Facility.DAEMON,
+               protocol='UDP'):
     self.host = host
     self.port = port
     self.facility = facility
-    self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    self.protocol = protocol
+    if self.protocol == 'UDP':
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    elif self.protocol == 'TCP':
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.connect((self.host, self.port))
+    else:
+        raise Exception('Invalid protocol {}, valid options are UDP and TCP'.format(self.protocol))
 
   def send(self, message, level=Level.NOTICE):
-    "Send a syslog message to remote host using UDP."
+    "Send a syslog message to remote host using UDP or TCP"
     data = "<%d>%s" % (level + self.facility*8, message)
-    self.socket.sendto(data.encode('utf-8'), (self.host, self.port))
+    if self.protocol == 'UDP':
+        self.socket.sendto(data.encode('utf-8'), (self.host, self.port))
+    else:
+        self.socket.send(data.encode('utf-8'))
 
   def warn(self, message):
     "Send a syslog warning message."

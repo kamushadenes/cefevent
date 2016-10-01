@@ -321,12 +321,13 @@ class CEFEvent(object):
 
 class CEFSender(object):
 
-    def __init__(self, files, host, port):
+    def __init__(self, files, host, port, protocol='UDP'):
 
         self.cef_poll = []
         self.host = host
         self.port = port
-        self.syslog = Syslog(host, port=port)
+        self.protocol = protocol
+        self.syslog = Syslog(host, port=port, protocol=self.protocol)
 
         self.max_eps = 100
 
