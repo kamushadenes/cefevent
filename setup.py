@@ -9,7 +9,7 @@ if os.path.exists('README.md'):
 setup(
   name = 'cefevent',
   packages = ['cefevent'], # this must be the same as the name above
-  version = '0.4.7',
+  version = '0.4.8',
   description = 'ArcSight Common Event Format library',
   long_description = long_description,
   author = 'Kamus Hadenes',

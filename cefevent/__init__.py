@@ -354,9 +354,12 @@ class CEFSender(object):
                     if len(fields) != len(headers):
                         continue
                     cef = CEFEvent()
-                    for r in range(0, len(fields) - 1):
+                    for r in range(0, len(fields)):
                         cef.set_field(headers[r], fields[r])
                     self.cef_poll.append(cef)
+
+    def get_cef_poll(self):
+        self.log(self.cef_poll)
 
     def get_info(self):
         self.log('There are {} events in the poll. The max EPS is set to {}'.format(
