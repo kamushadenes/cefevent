@@ -98,7 +98,7 @@ class CEFEvent(object):
         'dvchost': {'full_name': 'deviceHostName', 'data_type': 'String', 'length': 100, 'description': 'The format should be a fully qualified domain name associated with the device node, when a node is available. Examples: "host.domain.com" or "host".'},
         'dvcpid': {'full_name': 'deviceProcessId', 'data_type': 'Integer', 'length': 0, 'description': 'Provides the ID of the process on the device generating the event.'},
         'end': {'full_name': 'endTime', 'data_type': 'TimeStamp', 'length': 0, 'description': 'The time at which the activity related to the event ended. The format is MMM dd yyyy HH:mm:ss or milliseconds since epoch (Jan 1st 1970). An example would be reporting the end of a session.'},
-        'externalId': {'full_name': 'externalId', 'data_type': 'Integer', 'length': 0, 'description': 'An ID used by the originating device.'},
+        'externalId': {'full_name': 'externalId', 'data_type': 'String', 'length': 40, 'description': 'An ID used by the originating device.'},
         'fileCreateTime': {'full_name': 'fileCreateTime', 'data_type': 'TimeStamp', 'length': 0, 'description': 'Time when file was created.'},
         'fileHash': {'full_name': 'fileHash', 'data_type': 'String', 'length': 255, 'description': 'Hash of a file.'},
         'fileId': {'full_name': 'fileId', 'data_type': 'String', 'length': 1023, 'description': 'An ID associated with a file could be the inode.'},
