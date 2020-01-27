@@ -132,7 +132,6 @@ class CEFEvent(object):
         'requestCookies': {'full_name': 'requestCookies', 'data_type': 'String', 'length': 1023, 'description': 'Cookies associated with the request.'},
         'requestMethod': {'full_name': 'requestMethod', 'data_type': 'String', 'length': 1023, 'description': 'The method used to access a URL. Possible values: "POST", "GET", ...'},
         'request': {'full_name': 'requestURL', 'data_type': 'String', 'length': 1023, 'description': 'In the case of an HTTP request, this field contains the URL accessed. The URL should contain the protocol as well, e.g., "http://www.security.com"'},
-        'request': {'full_name': 'requestURL', 'data_type': 'String', 'length': 1023, 'description': 'In the case of an HTTP request, this field contains the URL accessed. The URL should contain the protocol as well, e.g., http://www.security.com'},
         'rt': {'full_name': 'receiptTime', 'data_type': 'TimeStamp', 'length': 0, 'description': 'The time at which the event related to the activity was received. The format is MMM dd yyyy HH:mm:ss or milliseconds since epoch (Jan 1st 1970).'},
         'shost': {'full_name': 'sourceHostName', 'data_type': 'String', 'length': 1023, 'description': 'Identifies the source that an event refers to in an IP network. The format should be a fully qualified domain name associated with the source node, when a node is available. Examples: "host.domain.com" or "host".'},
         'smac': {'full_name': 'sourceMacAddress', 'data_type': 'MAC Address', 'length': 0, 'description': 'Six colon-separated hexadecimal numbers. Example: "00:0D:60:AF:1B:61"'},
@@ -143,13 +142,11 @@ class CEFEvent(object):
         'sourceTranslatedPort': {'full_name': 'sourceTranslatedPort', 'data_type': 'Integer', 'length': 0, 'description': 'Port after it was translated by for example a firewall. Valid port numbers are 0 to 65535.'},
         'spid': {'full_name': 'sourceProcessId', 'data_type': 'Integer', 'length': 0, 'description': 'The ID of the source process associated with the event.'},
         'spriv': {'full_name': 'sourceUserPrivileges', 'data_type': 'String', 'length': 1023, 'description': 'The allowed values are: "Administrator", "User", and "Guest". It identifies the source user\'s privileges. In UNIX, for example, activity executed by the root user would be identified with sourceUserPrivileges of "Administrator". This is an idealized and simplified view on privileges and can be extended in the future.'},
-        'spriv': {'full_name': 'sourceUserPrivileges', 'data_type': 'String', 'length': 1023, 'description': 'The allowed values are: Administrator", "User", and "Guest". It identifies the source user\'s privileges. In UNIX, for example, activity executed by the root user would be identified with sourceUserPrivileges of "Administrator". This is an idealized and simplified view on privileges and can be extended in the future.'},
         'spt': {'full_name': 'sourcePort', 'data_type': 'Integer', 'length': 0, 'description': 'The valid port numbers are 0 to 65535.'},
         'src': {'full_name': 'sourceAddress', 'data_type': 'IPv4 Address', 'length': 0, 'description': 'Identifies the source that an event refers to in an IP network. The format is an IPv4 address. Example: "192.168.10.1"'},
         'start': {'full_name': 'startTime', 'data_type': 'TimeStamp', 'length': 0, 'description': 'The time when the activity the event referred to started. The format is MMM dd yyyy HH:mm:ss or milliseconds since epoch (Jan 1st 1970).'},
         'suid': {'full_name': 'sourceUserId', 'data_type': 'String', 'length': 1023, 'description': 'Identifies the source user by ID. This is the user associated with the source of the event. For example, in "UNIX, the root user is generally associated with user ID 0.'},
         'suser': {'full_name': 'sourceUserName', 'data_type': 'String', 'length': 1023, 'description': 'Identifies the source user by name. E-mail addresses are also mapped into the UserName fields. The sender is a candidate to put into sourceUserName.'},
-
     }
 
     def __init__(self):
