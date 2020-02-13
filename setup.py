@@ -12,6 +12,7 @@ setup(
   version = '0.5.0',
   description = 'ArcSight Common Event Format library',
   long_description = long_description,
+  long_description_content_type = "text/markdown"
   author = 'Kamus Hadenes',
   author_email = 'kamushadenes@hyadesinc.com',
   url = 'https://github.com/kamushadenes/cefevent',
