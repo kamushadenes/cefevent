@@ -1,5 +1,5 @@
 import os
-from distutils.core import setup
+from setuptools import setup
 
 long_description = 'ArcSight Common Event Format library'
 if os.path.exists('README.md'):
