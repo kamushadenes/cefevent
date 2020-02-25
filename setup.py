@@ -9,13 +9,13 @@ if os.path.exists('README.md'):
 setup(
   name = 'cefevent',
   packages = ['cefevent'],
-  version = '0.5.0',
+  version = '0.5.1',
   description = 'ArcSight Common Event Format library',
   long_description = long_description,
   long_description_content_type = "text/markdown",
   author = 'Kamus Hadenes',
   author_email = 'kamushadenes@hyadesinc.com',
   url = 'https://github.com/kamushadenes/cefevent',
-  download_url = 'https://github.com/kamushadenes/cefevent/tarball/0.5.0',
+  download_url = 'https://github.com/kamushadenes/cefevent/tarball/0.5.1',
   keywords = ['logging', 'cef', 'arcsight', 'event', 'security'],
 )
