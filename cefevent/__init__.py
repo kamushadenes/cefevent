@@ -209,7 +209,10 @@ class CEFEvent(object):
 
         if prefix in self._prefix_list:
             if prefix == 'severity':
-                if int(value) in range(0, 11):
+                if value in ['Unknown', 'Low', 'Medium', 'High', 'Very-High']:
+                    self.prefixes[prefix] = value
+                    return self.prefixes[prefix]
+                elif int(value) in range(0, 11):
                     self.prefixes[prefix] = int(value)
                     return self.prefixes[prefix]
                 else:
