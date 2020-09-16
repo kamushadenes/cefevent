@@ -149,7 +149,14 @@ class CEFEvent(object):
         'suser': {'full_name': 'sourceUserName', 'data_type': 'String', 'length': 1023, 'description': 'Identifies the source user by name. E-mail addresses are also mapped into the UserName fields. The sender is a candidate to put into sourceUserName.'},
     }
 
-    def __init__(self):
+    def __init__(self, strict=False):
+        """
+        Create a new CEFEvent.  
+
+        Arguments:  
+        - strict (`bool`): Set to True to throw ValueError if trying to create create an invalid CEFEvent. 
+
+        """
 
         self.reset()
 
@@ -157,6 +164,8 @@ class CEFEvent(object):
 
         self._validate_extensions()
         self._build_reverse_extension_dictionary()
+
+        self.strict=strict
 
     def __repr__(self):
         return self.build_cef()
@@ -213,12 +222,17 @@ class CEFEvent(object):
                     self.prefixes[prefix] = int(value)
                     return self.prefixes[prefix]
                 else:
+                    if self.strict:
+                        raise ValueError("The severity must be an int in [0-10]. Not: {}".format(value))
                     return False
             else:
                 value = value.replace('\\', '\\\\')
                 value = value.replace('|', '\\|')
                 self.prefixes[prefix] = value.strip()
                 return self.prefixes[prefix]
+        if self.strict:
+            raise ValueError("Unknown CEF prefix: {}".format(prefix))
+        return False
 
     def set_field(self, field, value):
 
@@ -231,6 +245,8 @@ class CEFEvent(object):
                 self.extensions[field] = v
                 return self.extensions[field]
             else:
+                if self.strict:
+                    raise ValueError("Invalid value for field: {}\nThe following rules apply: {}".format(field, self.get_field_metadata(field)))
                 return False
         elif field in self._extension_dictionary:
             field = self._extension_dictionary[field]['full_name']
@@ -239,7 +255,12 @@ class CEFEvent(object):
                 self.extensions[field] = v
                 return self.extensions[field]
             else:
+                if self.strict:
+                    raise ValueError("Invalid value for field: {}\nThe following rules apply: {}".format(field, self.get_field_metadata(field)))
                 return False
+        if self.strict:
+            raise ValueError("Unknown CEF field: {}".format(field))
+        return False
 
     def _build_reverse_extension_dictionary(self):
 
@@ -319,6 +340,55 @@ class CEFEvent(object):
         assert self.set_field('message', 123456) == '123456'
         assert self.set_field('message', 'test=123456') == 'test\=123456'
 
+        self.strict=True
+        try:
+            self.set_field('sourceAddress', 'notaIPaddress')
+        except ValueError as e:
+            assert 'The following rules apply' in str(e), "The string 'The following rules apply' do not appear in thown error when setting an invalid ip"
+        else:
+            assert False, "The set_field() fields methods did ot throw an error when setting an invalid ip"
+
+        try:
+            self.set_field('src', 'notaIPaddress')
+        except ValueError as e:
+            assert 'The following rules apply' in str(e), "The string 'The following rules apply' do not appear in thown error when setting an invalid ip"
+        else:
+            assert False, "The set_field() fields methods did ot throw an error when setting an invalid ip"
+
+        try:
+            self.set_field('not an field name', 'VALUE')
+        except ValueError as e:
+            assert 'Unknown CEF field' in str(e), "The string 'Unknown CEF field' do not appear in thown error"
+        else:
+            assert False, "The set_field() fields methods did ot throw an error when setting an unknown field"
+
+        try:
+            self.set_prefix('not an prefix name', 'VALUE')
+        except ValueError as e:
+            assert 'Unknown CEF prefix' in str(e), "The string 'Unknown CEF prefix' do not appear in thown error"
+        else:
+            assert False, "The set_prefix() fields methods did ot throw an error when setting an unknown prefix"
+
+        try:
+            self.set_prefix( 'severity', 42 )
+        except ValueError as e:
+            assert 'The severity must be an int in [0-10]' in str(e), "The string 'The severity must be an int in [0-10]' do not appear in thown error"
+        else:
+            assert False, "The set_prefix() fields methods did ot throw an error when setting an severevity out of bounds"
+        
+        self.strict=False
+        try:
+            try:
+                self.set_field('src', 'notaIPaddress')
+            except ValueError as e:
+                assert 'The following rules apply' in str(e), "The string 'The following rules apply' do not appear in thown error when setting an invalid ip"
+            else:
+                assert False, "The set_field() fields methods did ot throw an error when setting an invalid ip"
+        except AssertionError as e :
+            pass
+        else:
+            assert False, "The strict test passed event if self.strict=False"
+        
         self.reset()
 
 
