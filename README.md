@@ -118,7 +118,7 @@ c.set_field('sourceAddress', '192.168.67.500')
 
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/tristan/Documents/WPWatcher/cefevent/cefevent/__init__.py", line 249, in set_field
+  File "cefevent/cefevent/__init__.py", line 249, in set_field
     raise ValueError("Invalid value for field: {}\nThe following rules apply: {}".format(field, self.get_field_metadata(field)))
 ValueError: Invalid value for field: sourceAddress
 The following rules apply: {'full_name': 'sourceAddress', 'data_type': 'IPv4 Address', 'length': 0, 'description': 'Identifies the source that an event refers to in an IP network. The format is an IPv4 address. Example: "192.168.10.1"', 'name': 'src'}
