@@ -45,7 +45,7 @@ python run.py --host localhost --port 10514 --auto_send --eps 10000 /tmp/example
 
 #### Get field metadata
 
-```
+```python
 from cefevent import CEFEvent
 c = CEFEvent()
 
@@ -74,7 +74,7 @@ c.get_field_metadata('c6a1')
 ```
 
 #### Convert ArcSight Naming to CEF Naming
-```
+```python
 from cefevent import CEFEvent
 c = CEFEvent()
 
@@ -85,7 +85,7 @@ c.get_cef_field_name('deviceAddress')
 
 #### Build an CEF event from scratch
 
-```
+```python
 from cefevent import CEFEvent
 c = CEFEvent()
 
@@ -104,5 +104,22 @@ c.set_field('sourcePort', 12345)
 c.build_cef()
 
 'CEF:0|Hyades Inc.|cefevent|1.0|0|Event Name|5|spt=12345 src=192.168.67.1 msg=This is a test event (Answer\\=42)'
+```
 
+#### Raise errors
 
+By default the methods `set_field()` and `set_prefix()` returns `False` if the name or the value or the CEF field is invalid.  
+Set `CEFEvent.strict=True` to raise `ValueError` if any invalid field name / values are passed.  
+
+```
+from cefevent import CEFEvent
+c = CEFEvent(strict=True)
+c.set_field('sourceAddress', '192.168.67.500')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "cefevent/cefevent/__init__.py", line 249, in set_field
+    raise ValueError("Invalid value for field: {}\nThe following rules apply: {}".format(field, self.get_field_metadata(field)))
+ValueError: Invalid value for field: sourceAddress
+The following rules apply: {'full_name': 'sourceAddress', 'data_type': 'IPv4 Address', 'length': 0, 'description': 'Identifies the source that an event refers to in an IP network. The format is an IPv4 address. Example: "192.168.10.1"', 'name': 'src'}
+```
