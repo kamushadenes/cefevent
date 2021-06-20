@@ -244,7 +244,7 @@ class CEFEvent(object):
 
         if field in self._reverse_extension_dictionary:
             v = self._validate_field_value(field, value)
-            if v:
+            if v is not False:
                 self.extensions[field] = v
                 return self.extensions[field]
             else:
