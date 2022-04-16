@@ -7,8 +7,7 @@ from cefevent.syslog import Syslog
 
 
 class CEFSender(object):
-
-    def __init__(self, files, host, port, protocol='UDP'):
+    def __init__(self, files, host, port, protocol="UDP"):
 
         self.cef_poll = []
         self.host = host
@@ -30,14 +29,14 @@ class CEFSender(object):
         self.scheduler = sched.scheduler(time.time, time.sleep)
 
         for fn in files:
-            with open(fn, 'r') as f:
+            with open(fn, "r") as f:
                 lines = f.readlines()
 
-                headers = [i.strip() for i in lines[0].split(';')]
+                headers = [i.strip() for i in lines[0].split(";")]
 
                 for l in lines[1:]:
                     l = l.strip()
-                    fields = [i.strip() for i in l.split(';')]
+                    fields = [i.strip() for i in l.split(";")]
                     if len(fields) != len(headers):
                         continue
                     cef = CEFEvent()
@@ -49,8 +48,11 @@ class CEFSender(object):
         self.log(self.cef_poll)
 
     def get_info(self):
-        self.log('There are {} events in the poll. The max EPS is set to {}'.format(
-            len(self.cef_poll), self.max_eps))
+        self.log(
+            "There are {} events in the poll. The max EPS is set to {}".format(
+                len(self.cef_poll), self.max_eps
+            )
+        )
 
     def send_log(self, cef):
         self.syslog.send(cef)
@@ -74,18 +76,19 @@ class CEFSender(object):
         time_diff = (now - self.auto_send_checkpoint).total_seconds()
         eps = self.checkpoint_sent_count / (time_diff if time_diff > 0 else 1)
 
-        self.log('Current EPS: {}'.format(eps))
+        self.log("Current EPS: {}".format(eps))
 
         self.auto_send_checkpoint = now
         self.checkpoint_sent_count = 0
 
     def log(self, msg):
-        now = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-        print('[*] [{}] {}'.format(now, msg))
+        now = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+        print("[*] [{}] {}".format(now, msg))
 
     def get_total_event_count(self):
-        self.log('{} events sent since {}'.format(
-            self.sent_count, self.auto_send_start))
+        self.log(
+            "{} events sent since {}".format(self.sent_count, self.auto_send_start)
+        )
 
     def auto_send_log(self, eps):
         self.max_eps = eps
