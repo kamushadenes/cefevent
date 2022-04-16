@@ -1,11 +1,12 @@
 <h1 align="center">cefevent</h1>
 
-
 <p align="center">
 ArcSight's Common Event Format library
 </p>
 
 <hr>
+
+[![Downloads](https://pepy.tech/badge/cefevent)](https://pepy.tech/project/cefevent)
 
 This library is able to generate, validate and send CEF events (currently peaking at about 3400 EPS)
 
