@@ -8,6 +8,8 @@ ArcSight's Common Event Format library
 
 [![Downloads](https://pepy.tech/badge/cefevent)](https://pepy.tech/project/cefevent)
 
+<hr>
+
 This library is able to generate, validate and send CEF events (currently peaking at about 3400 EPS)
 
 It uses CSV files with the CEF field names as headers in the first line and then sends it at the specified EPS rate to the configured UDP Syslog destination.
