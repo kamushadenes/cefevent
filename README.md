@@ -1,10 +1,26 @@
-# cefevent
+<h1 align="center">cefevent</h1>
 
+<p align="center">
 ArcSight's Common Event Format library
+</p>
+
+<hr>
+
+[![Downloads](https://pepy.tech/badge/cefevent)](https://pepy.tech/project/cefevent)
+![GitHub](https://img.shields.io/github/license/kamushadenes/cefevent)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/kamushadenes/cefevent)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/kamushadenes/cefevent)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kamushadenes/cefevent)
+![PyPI - Format](https://img.shields.io/pypi/format/cefevent)
+
+
+<hr>
 
 This library is able to generate, validate and send CEF events (currently peaking at about 3400 EPS)
 
 It uses CSV files with the CEF field names as headers in the first line and then sends it at the specified EPS rate to the configured UDP Syslog destination.
+
+<hr>
 
 
 ## Usage
@@ -111,11 +127,13 @@ c.build_cef()
 By default the methods `set_field()` and `set_prefix()` returns `False` if the name or the value or the CEF field is invalid.  
 Set `CEFEvent.strict=True` to raise `ValueError` if any invalid field name / values are passed.  
 
-```
+```python
 from cefevent import CEFEvent
 c = CEFEvent(strict=True)
 c.set_field('sourceAddress', '192.168.67.500')
+```
 
+```
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "cefevent/cefevent/__init__.py", line 249, in set_field
