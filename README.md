@@ -115,7 +115,9 @@ Set `CEFEvent.strict=True` to raise `ValueError` if any invalid field name / val
 from cefevent import CEFEvent
 c = CEFEvent(strict=True)
 c.set_field('sourceAddress', '192.168.67.500')
+```
 
+```
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "cefevent/cefevent/__init__.py", line 249, in set_field
