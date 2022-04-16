@@ -6,12 +6,13 @@ ArcSight's Common Event Format library
 
 <hr>
 
+[![Downloads](https://pepy.tech/badge/cefevent)](https://pepy.tech/project/cefevent)
 ![GitHub](https://img.shields.io/github/license/kamushadenes/cefevent)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/kamushadenes/cefevent)
-![PyPI - Format](https://img.shields.io/pypi/format/cefevent)
-[![Downloads](https://pepy.tech/badge/cefevent)](https://pepy.tech/project/cefevent)
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/kamushadenes/cefevent)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kamushadenes/cefevent)
+![PyPI - Format](https://img.shields.io/pypi/format/cefevent)
+
 
 <hr>
 
