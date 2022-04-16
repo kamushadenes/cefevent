@@ -111,7 +111,7 @@ c.build_cef()
 By default the methods `set_field()` and `set_prefix()` returns `False` if the name or the value or the CEF field is invalid.  
 Set `CEFEvent.strict=True` to raise `ValueError` if any invalid field name / values are passed.  
 
-```
+```python
 from cefevent import CEFEvent
 c = CEFEvent(strict=True)
 c.set_field('sourceAddress', '192.168.67.500')
