@@ -2,12 +2,16 @@ import random
 import sched
 import time
 from datetime import datetime
+from typing import List, AnyStr, Any, Callable
 
+from cefevent.event import CEFEvent
 from cefevent.syslog import Syslog
 
 
 class CEFSender(object):
-    def __init__(self, files, host, port, protocol="UDP"):
+    def __init__(
+        self, files: List[AnyStr], host: AnyStr, port: int, protocol: AnyStr = "UDP"
+    ):
 
         self.cef_poll = []
         self.host = host
@@ -34,14 +38,13 @@ class CEFSender(object):
 
                 headers = [i.strip() for i in lines[0].split(";")]
 
-                for l in lines[1:]:
-                    l = l.strip()
-                    fields = [i.strip() for i in l.split(";")]
+                for line in lines[1:]:
+                    line = line.strip()
+                    fields = [i.strip() for i in line.split(";")]
                     if len(fields) != len(headers):
                         continue
                     cef = CEFEvent()
-                    for r in range(0, len(fields)):
-                        cef.set_field(headers[r], fields[r])
+                    cef.load(headers, fields)
                     self.cef_poll.append(cef)
 
     def get_cef_poll(self):
@@ -54,15 +57,15 @@ class CEFSender(object):
             )
         )
 
-    def send_log(self, cef):
-        self.syslog.send(cef)
+    def send_log(self, cef: CEFEvent):
+        self.syslog.send(cef.build_cef())
         self.sent_count += 1
         self.checkpoint_sent_count += 1
 
     def send_random_log(self, *args, **kw):
         self.send_log(random.choice(self.cef_poll))
 
-    def timed_call(self, calls_per_second, callback, *args, **kw):
+    def timed_call(self, calls_per_second: float, callback: Callable, *args, **kw):
         period = 1.0 / calls_per_second
 
         def reload():
@@ -81,7 +84,8 @@ class CEFSender(object):
         self.auto_send_checkpoint = now
         self.checkpoint_sent_count = 0
 
-    def log(self, msg):
+    @staticmethod
+    def log(msg: Any):
         now = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         print("[*] [{}] {}".format(now, msg))
 
@@ -90,7 +94,7 @@ class CEFSender(object):
             "{} events sent since {}".format(self.sent_count, self.auto_send_start)
         )
 
-    def auto_send_log(self, eps):
+    def auto_send_log(self, eps: int):
         self.max_eps = eps
         self.get_info()
         self.auto_send_start = datetime.now()
@@ -98,3 +102,7 @@ class CEFSender(object):
         self.timed_call(0.1, self.get_eps)
         self.timed_call(0.016, self.get_total_event_count)
         self.scheduler.run()
+
+    def send_logs(self):
+        for ev in self.cef_poll:
+            self.send_log(ev)

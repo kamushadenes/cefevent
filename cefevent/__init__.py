@@ -1,2 +1,2 @@
-from .cefevent import CEFEvent
-from .cefsender import CEFSender
+from .event import CEFEvent
+from .sender import CEFSender

@@ -14,7 +14,8 @@ import socket
 
 
 class Facility:
-    "Syslog facilities"
+    """Syslog facilities"""
+
     (
         KERN,
         USER,
@@ -34,7 +35,8 @@ class Facility:
 
 
 class Level:
-    "Syslog levels"
+    """Syslog levels"""
+
     EMERG, ALERT, CRIT, ERR, WARNING, NOTICE, INFO, DEBUG = range(8)
 
 
@@ -66,7 +68,7 @@ class Syslog:
             )
 
     def send(self, message, level=Level.NOTICE):
-        "Send a syslog message to remote host using UDP or TCP"
+        """Send a syslog message to remote host using UDP or TCP"""
         data = "<%d>%s" % (level + self.facility * 8, message)
         if self.protocol == "UDP":
             self.socket.sendto(data.encode("utf-8"), (self.host, self.port))
@@ -74,13 +76,13 @@ class Syslog:
             self.socket.send(data.encode("utf-8"))
 
     def warn(self, message):
-        "Send a syslog warning message."
+        """Send a syslog warning message."""
         self.send(message, Level.WARNING)
 
     def notice(self, message):
-        "Send a syslog notice message."
+        """Send a syslog notice message."""
         self.send(message, Level.NOTICE)
 
     def error(self, message):
-        "Send a syslog error message."
+        """Send a syslog error message."""
         self.send(message, Level.ERR)
