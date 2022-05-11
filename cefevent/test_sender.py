@@ -57,7 +57,7 @@ def test_sender():
 
     sender.send_logs()
 
-    sleep(1)
+    sleep(5)
     running.clear()
 
     assert recvd_pkt == len(sender.cef_poll)
