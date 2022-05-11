@@ -168,3 +168,31 @@ Traceback (most recent call last):
 ValueError: Invalid value for field: sourceAddress
 The following rules apply: {'full_name': 'sourceAddress', 'data_type': 'IPv4 Address', 'length': 0, 'description': 'Identifies the source that an event refers to in an IP network. The format is an IPv4 address. Example: "192.168.10.1"', 'name': 'src'}
 ```
+
+## Running Tests
+
+The project uses [pytest](https://pytest.org/).
+
+```bash
+pytest -v
+```
+
+```
+================================================================== test session starts ==================================================================
+platform darwin -- Python 3.9.12, pytest-7.1.2, pluggy-1.0.0 -- /opt/homebrew/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/henrique.goncalves/Dropbox/Projects/Personal/Code/cefevent
+collected 9 items
+
+test_event.py::test_load PASSED                                                                                                                   [ 11%]
+test_event.py::test_source_address PASSED                                                                                                         [ 22%]
+test_event.py::test_source_mac_address PASSED                                                                                                     [ 33%]
+test_event.py::test_source_port PASSED                                                                                                            [ 44%]
+test_event.py::test_message PASSED                                                                                                                [ 55%]
+test_event.py::test_strict PASSED                                                                                                                 [ 66%]
+test_generator.py::test_random_addr PASSED                                                                                                        [ 77%]
+test_generator.py::test_generate_random_events PASSED                                                                                             [ 88%]
+test_sender.py::test_sender PASSED                                                                                                                [100%]
+
+=================================================================== 9 passed in 6.71s ===================================================================
+```
