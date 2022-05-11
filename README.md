@@ -201,4 +201,4 @@ test_sender.py::test_sender PASSED                                              
 
 Give a ⭐️ if this project helped you!
 
-<a href="https://www.buymeacoffee.com/kamushadenes"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="25" width="105" alt="kamushadenes" /></a>
+<a href="https://www.buymeacoffee.com/kamushadenes"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="32" alt="kamushadenes" /></a>
