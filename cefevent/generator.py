@@ -48,6 +48,8 @@ def generate_random_events(
 
     for _ in range(0, event_count):
         ev = CEFEvent(strict=strict)
+        ev.set_prefix("name", "Random CEF Event")
+        ev.set_prefix("severity", random.randint(0, 10))
         for field in fields:
             fdef = cef._reverse_extension_dictionary[field]
             if fdef["data_type"] == "String":

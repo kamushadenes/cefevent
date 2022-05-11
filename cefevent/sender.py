@@ -106,3 +106,4 @@ class CEFSender(object):
     def send_logs(self):
         for ev in self.cef_poll:
             self.send_log(ev)
+        self.log("{} events sent".format(self.sent_count))

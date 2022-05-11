@@ -7,7 +7,9 @@ import argparse
 from cefevent.sender import CEFSender
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CEF builder and replayer")
+    parser = argparse.ArgumentParser(
+        description="This library is able to generate, validate and send CEF events"
+    )
     parser.add_argument(
         "files",
         metavar="DEFINITION_FILE",
@@ -20,10 +22,12 @@ if __name__ == "__main__":
     )
     parser.add_argument("--port", type=int, default=514, help="Syslog destination port")
     parser.add_argument("--tcp", action="store_true", help="Use TCP instead of UDP")
-    parser.add_argument("--auto_send", action="store_true", help="Auto send logs")
+    parser.add_argument(
+        "--auto_send",
+        action="store_true",
+        help="Auto send logs, default to sending once",
+    )
     parser.add_argument("--eps", type=int, default=100, help="Max EPS")
-
-    parser.add_argument("--test")
 
     args = parser.parse_args()
 

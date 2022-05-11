@@ -1,4 +1,5 @@
 import csv
+import os
 import random
 import select
 import socket
@@ -60,3 +61,5 @@ def test_sender():
     running.clear()
 
     assert recvd_pkt == len(sender.cef_poll)
+
+    map(os.remove, fnames)
