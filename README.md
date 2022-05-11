@@ -196,3 +196,7 @@ test_sender.py::test_sender PASSED                                              
 
 =================================================================== 9 passed in 6.71s ===================================================================
 ```
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
