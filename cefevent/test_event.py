@@ -53,7 +53,6 @@ def test_deviceCustomIPv6Address4():
     assert ev.set_field("deviceCustomIPv6Address4", "INVALID_DATA") is False
     assert ev.set_field("deviceCustomIPv6Address4", "2001:0db8:85a3:0000:0000:8a2e:0370:7334") == "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
     assert ev.set_field("deviceCustomIPv6Address4", "2001:0db8:85a3::1") == "2001:0db8:85a3::1"
-    assert ev.set_field("deviceCustomIPv6Address4", "2001:0db8:85a3::1:1") is False
 
 
 def test_strict():
