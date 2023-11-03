@@ -48,8 +48,20 @@ class CEFEvent(object):
     def _validate_field_value(self, field: AnyStr, value: Any):
         obj = self._reverse_extension_dictionary[field]
 
+        # Handle special case of ports
+        if obj["full_name"].endswith("Port"):
+            try:
+                value = int(value)
+            except:
+                return False
+            if not 0 <= value <= 65535:
+                return False
+            return value
+
         for dt in obj["data_type"]:
             if dt in ["Integer", "Long"]:
+                if dt == "Integer" and value > 2**31-1:
+                    continue
                 try:
                     return int(value)
                 except:
