@@ -35,8 +35,10 @@ def test_source_port():
     ev = CEFEvent()
 
     assert ev.set_field("sourcePort", "INVALID_DATA") is False
-    assert ev.set_field("sourcePort", "123456") == 123456
-    assert ev.set_field("sourcePort", 123456) == 123456
+    assert ev.set_field("sourcePort", "123456") is False
+    assert ev.set_field("sourcePort", 123456) is False
+    assert ev.set_field("sourcePort", "12345") == 12345
+    assert ev.set_field("sourcePort", 12345) == 12345
 
 
 def test_message():
