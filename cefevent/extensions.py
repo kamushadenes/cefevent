@@ -158,7 +158,7 @@ extension_dictionary = {
     "cs1": {
         "full_name": "deviceCustomString1",
         "data_type": ["String"],
-        "length": 1023,
+        "length": 4000,
         "description": "There are six strings available which can be used to map fields which do not fit into any other field of this dictionary. If possible, these fields should not be used, but a more specific field from the dictionary. Also check the guidelines later in this document for hints about utilizing these fields.",
     },
     "cs1Label": {
@@ -170,7 +170,7 @@ extension_dictionary = {
     "cs2": {
         "full_name": "deviceCustomString2",
         "data_type": ["String"],
-        "length": 1023,
+        "length": 4000,
         "description": "There are six strings available which can be used to map fields which do not fit into any other field of this dictionary. If possible, these fields should not be used, but a more specific field from the dictionary. Also check the guidelines later in this document for hints about utilizing these fields.",
     },
     "cs2Label": {
@@ -182,7 +182,7 @@ extension_dictionary = {
     "cs3": {
         "full_name": "deviceCustomString3",
         "data_type": ["String"],
-        "length": 1023,
+        "length": 4000,
         "description": "There are six strings available which can be used to map fields which do not fit into any other field of this dictionary. If possible, these fields should not be used, but a more specific field from the dictionary. Also check the guidelines later in this document for hints about utilizing these fields.",
     },
     "cs3Label": {
@@ -194,7 +194,7 @@ extension_dictionary = {
     "cs4": {
         "full_name": "deviceCustomString4",
         "data_type": ["String"],
-        "length": 1023,
+        "length": 4000,
         "description": "There are six strings available which can be used to map fields which do not fit into any other field of this dictionary. If possible, these fields should not be used, but a more specific field from the dictionary. Also check the guidelines later in this document for hints about utilizing these fields.",
     },
     "cs4Label": {
@@ -206,7 +206,7 @@ extension_dictionary = {
     "cs5": {
         "full_name": "deviceCustomString5",
         "data_type": ["String"],
-        "length": 1023,
+        "length": 4000,
         "description": "There are six strings available which can be used to map fields which do not fit into any other field of this dictionary. If possible, these fields should not be used, but a more specific field from the dictionary. Also check the guidelines later in this document for hints about utilizing these fields.",
     },
     "cs5Label": {
@@ -218,7 +218,7 @@ extension_dictionary = {
     "cs6": {
         "full_name": "deviceCustomString6",
         "data_type": ["String"],
-        "length": 1023,
+        "length": 4000,
         "description": "There are six strings available which can be used to map fields which do not fit into any other field of this dictionary. If possible, these fields should not be used, but a more specific field from the dictionary. Also check the guidelines later in this document for hints about utilizing these fields.",
     },
     "cs6Label": {
@@ -308,7 +308,7 @@ extension_dictionary = {
     "deviceInboundInterface": {
         "full_name": "deviceInboundInterface",
         "data_type": ["String"],
-        "length": 15,
+        "length": 128,
         "description": "Interface on which the packet or data entered the device.",
     },
     "deviceMacAddress": {
@@ -326,7 +326,7 @@ extension_dictionary = {
     "deviceOutboundInterface": {
         "full_name": "deviceOutboundInterface",
         "data_type": ["String"],
-        "length": 15,
+        "length": 128,
         "description": "Interface on which the packet or data left the device.",
     },
     "deviceProcessName": {
@@ -346,12 +346,6 @@ extension_dictionary = {
         "data_type": ["String"],
         "length": 1023,
         "description": 'Identifies the destination that an event refers to in an IP network. The format should be a fully qualified domain name associated with the destination node, when a node is available. Examples: "host.domain.com" or "host".',
-    },
-    "dhost": {
-        "full_name": "DestinationHostName",
-        "data_type": ["String"],
-        "length": 1023,
-        "description": 'Identifies the source that an event refers to in an IP network. The format should be a fully qualified domain name associated with the "destination node, when a node is available. Examples: "host.domain.com" or "host".',
     },
     "dmac": {
         "full_name": "destinationMac",
@@ -394,6 +388,12 @@ extension_dictionary = {
         "data_type": ["IPv4 Address"],
         "length": 0,
         "description": 'Identifies destination that the event refers to in an IP network. The format is an IPv4 address. Example: "192.168.10.1"',
+    },
+    "dtz": {
+        "full_name": "deviceTimeZone",
+        "data_type": ["String"],
+        "length": 255,
+        "description": 'The timezone for the device generating the event.',
     },
     "duid": {
         "full_name": "destinationUserId",
@@ -479,37 +479,37 @@ extension_dictionary = {
         "length": 1023,
         "description": "Type of file (pipe, socket, etc.)",
     },
-    "fd1": {
+    "flexDate1": {
         "full_name": "flexDate1",
         "data_type": ["TimeStamp"],
         "length": 0,
         "description": "A timestamp field available to map a timestamp that does not apply to any other defined timestamp field in this dictionary. Use all flex fields sparingly and seek a more specific, dictionary supplied field when possible. These fields are typically reserved for customer use and should not be set by vendors unless necessary.",
     },
-    "fd1Label": {
+    "flexDate1Label": {
         "full_name": "flexDate1Label",
         "data_type": ["String"],
         "length": 128,
         "description": "The label field is a string and describes the purpose of the flex field.",
     },
-    "fs1": {
+    "flexString1": {
         "full_name": "flexString1",
         "data_type": ["String"],
         "length": 1023,
         "description": "One of four floating point fields available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible. These fields are typically reserved for customer use and should not be set by vendors unless necessary.",
     },
-    "fs1Label": {
+    "flexString1Label": {
         "full_name": "flexString1Label",
         "data_type": ["String"],
         "length": 128,
         "description": "The label field is a string and describes the purpose of the flex field.",
     },
-    "fs2": {
+    "flexString2": {
         "full_name": "flexString2",
         "data_type": ["String"],
         "length": 1023,
         "description": "One of four floating point fields available to map fields that do not apply to any other in this dictionary. Use sparingly and seek a more specific, dictionary supplied field when possible. These fields are typically reserved for customer use and should not be set by vendors unless necessary.",
     },
-    "fs2Label": {
+    "flexString2Label": {
         "full_name": "flexString2Label",
         "data_type": ["String"],
         "length": 128,
