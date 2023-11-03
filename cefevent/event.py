@@ -47,54 +47,67 @@ class CEFEvent(object):
 
     def _validate_field_value(self, field: AnyStr, value: Any):
         obj = self._reverse_extension_dictionary[field]
-        if obj["data_type"] in ["Integer", "Long"]:
-            try:
-                return int(value)
-            except:
-                return False
-        elif obj["data_type"] == "IPv4 Address":
-            try:
-                socket.inet_pton(socket.AF_INET, value)
-            except AttributeError:  # no inet_pton here, sorry
+
+        for dt in obj["data_type"]:
+            if dt in ["Integer", "Long"]:
                 try:
-                    socket.inet_aton(value)
-                except socket.error:
-                    return False
+                    return int(value)
+                except:
+                    continue
+            elif dt == "IPv4 Address":
                 if not value.count(".") == 3:
-                    return False
-            except socket.error:  # not a valid address
-                return False
-            return value
-
-        elif obj["data_type"] == "MAC Address":
-            valid_mac = bool(
-                re.match(
-                    "^" + "[\\:\\-]".join(["([0-9a-f]{2})"] * 6) + "$",
-                    value.strip().lower(),
+                    continue
+                try:
+                    socket.inet_pton(socket.AF_INET, value)
+                except AttributeError:  # no inet_pton here, sorry
+                    try:
+                        socket.inet_aton(value)
+                    except socket.error:
+                        continue
+                except socket.error:  # not a valid address
+                    continue
+                return value
+            elif dt == "IPv6 Address":
+                if not value.count(":") >= 2:
+                    continue
+                try:
+                    socket.inet_pton(socket.AF_INET6, value)
+                except:
+                    continue
+                return value
+            elif dt == "MAC Address":
+                valid_mac = bool(
+                    re.match(
+                        "^" + "[\\:\\-]".join(["([0-9a-f]{2})"] * 6) + "$",
+                        value.strip().lower(),
+                    )
                 )
-            )
-            if valid_mac:
-                return value.strip().lower()
-            else:
-                return False
+                if valid_mac:
+                    return value.strip().lower()
+                else:
+                    continue
 
-        elif obj["data_type"] == "String":
-            value = str(value).strip()
+            elif dt == "String":
+                value = str(value).strip()
 
-            if len(value) > obj["length"] > 0:
-                return False
+                if len(value) > obj["length"] > 0:
+                    continue
+                else:
+                    value = value.replace("\\", "\\\\")
+                    value = value.replace("=", "\\=")
+                    value = value.replace("\n", "\\n")
+                    return value
+            elif dt == "Floating Point":
+                try:
+                    return float(value)
+                except:
+                    continue
             else:
-                value = value.replace("\\", "\\\\")
-                value = value.replace("=", "\\=")
-                value = value.replace("\n", "\\n")
                 return value
 
-        else:
-            # TODO: add validations for IPv6 Address and Floating Point
-            return value
+        return False
 
     def set_prefix(self, prefix: AnyStr, value: Any):
-
         if prefix in self._prefix_list:
             if prefix == "severity":
                 if value in ["Unknown", "Low", "Medium", "High", "Very-High"]:
@@ -121,7 +134,6 @@ class CEFEvent(object):
         return False
 
     def set_field(self, field: AnyStr, value: Any):
-
         if field in self._prefix_list:
             return self.set_prefix(field, value)
 
@@ -157,28 +169,28 @@ class CEFEvent(object):
         return False
 
     def _build_reverse_extension_dictionary(self):
-
         for item in self._extension_dictionary.items():
             self._reverse_extension_dictionary[item[1]["full_name"]] = item[1]
             self._reverse_extension_dictionary[item[1]["full_name"]]["name"] = item[0]
 
     def _validate_extensions(self):
         for item in self._extension_dictionary.items():
-            if item[1]["data_type"] not in [
-                "TimeStamp",
-                "IPv4 Address",
-                "String",
-                "Long",
-                "Integer",
-                "MAC Address",
-                "IPv6 Address",
-                "Floating Point",
-            ]:
-                print(
-                    "[-] Invalid data_type in item {}: {}".format(
-                        item[0], item[1]["data_type"]
+            for dt in item[1]["data_type"]:
+                if dt not in [
+                    "TimeStamp",
+                    "IPv4 Address",
+                    "String",
+                    "Long",
+                    "Integer",
+                    "MAC Address",
+                    "IPv6 Address",
+                    "Floating Point",
+                ]:
+                    print(
+                        "[-] Invalid data_type in item {}: {}".format(
+                            item[0], item[1]["data_type"]
+                        )
                     )
-                )
             try:
                 int(item[1]["length"])
             except:
